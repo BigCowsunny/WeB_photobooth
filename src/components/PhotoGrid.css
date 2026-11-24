@@ -1,0 +1,193 @@
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+}
+
+/* Mobile Small (до 480px) */
+@media (max-width: 480px) {
+  .photo-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+}
+
+/* Mobile (481px - 640px) */
+@media (min-width: 481px) and (max-width: 640px) {
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+}
+
+/* Tablet (641px - 1023px) */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-5);
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-6);
+  }
+}
+
+/* Large Desktop (1280px+) */
+@media (min-width: 1280px) {
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+}
+
+.photo-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 2px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: var(--surface-warm);
+  cursor: pointer;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeInCard 0.4s ease-out forwards;
+  transition: all var(--motion-base) var(--ease-standard);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 10px rgba(192, 132, 252, 0.2),
+    inset 0 0 20px rgba(192, 132, 252, 0.05);
+}
+
+.photo-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.photo-card:nth-child(1) { animation-delay: 0.05s; }
+.photo-card:nth-child(2) { animation-delay: 0.1s; }
+.photo-card:nth-child(3) { animation-delay: 0.15s; }
+.photo-card:nth-child(4) { animation-delay: 0.2s; }
+.photo-card:nth-child(5) { animation-delay: 0.25s; }
+.photo-card:nth-child(6) { animation-delay: 0.3s; }
+.photo-card:nth-child(7) { animation-delay: 0.35s; }
+.photo-card:nth-child(8) { animation-delay: 0.4s; }
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--motion-base) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .photo-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.6),
+      0 0 30px rgba(192, 132, 252, 0.4),
+      0 0 60px rgba(192, 132, 252, 0.2),
+      inset 0 0 30px rgba(192, 132, 252, 0.1);
+  }
+  
+  .photo-card:hover img {
+    transform: scale(1.08);
+  }
+}
+
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, 
+    rgba(10, 5, 32, 0.95) 0%, 
+    rgba(10, 5, 32, 0.5) 40%,
+    transparent 70%);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+  pointer-events: none;
+  transition: background var(--motion-base) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .photo-card:hover .photo-overlay {
+    background: linear-gradient(to top, 
+      rgba(10, 5, 32, 0.98) 0%, 
+      rgba(10, 5, 32, 0.6) 50%,
+      transparent 80%);
+  }
+}
+
+.photo-title {
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(192, 132, 252, 0.4);
+  transition: all var(--motion-fast) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .photo-card:hover .photo-title {
+    color: var(--accent);
+    text-shadow: 
+      0 2px 8px rgba(0, 0, 0, 0.8),
+      0 0 30px rgba(192, 132, 252, 0.8);
+    transform: translateY(-4px);
+  }
+}
+
+/* Image Placeholder */
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  color: var(--muted);
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.image-placeholder svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+
+.image-placeholder p {
+  font-size: var(--text-xs);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .photo-title {
+    font-size: var(--text-xs);
+  }
+  
+  .photo-overlay {
+    padding: var(--space-3);
+  }
+  
+  .photo-card {
+    border-radius: var(--radius-md);
+  }
+  
+  .image-placeholder svg {
+    width: 32px;
+    height: 32px;
+  }
+}

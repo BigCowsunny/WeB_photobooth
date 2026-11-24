@@ -1,0 +1,415 @@
+/* === Design System Tokens (Space Galaxy Theme) === */
+:root {
+  /* Space Galaxy Color Palette */
+  --bg: #0a0520;
+  --surface: #1a1035;
+  --surface-warm: #2a1545;
+  --fg: #e8e4f3;
+  --fg-2: #c8c0e0;
+  --muted: #9b8fc7;
+  --meta: #7d6fb8;
+  --border: #3d2d6b;
+  --border-soft: #2d1d5b;
+  
+  /* Cosmic Purple & Blue Accent Colors */
+  --accent: #c084fc;
+  --accent-hover: #d8b4fe;
+  --accent-active: #a855f7;
+  --accent-on: #0a0520;
+  --sage-green: #60a5fa;
+  --sage-green-light: #93c5fd;
+  --sage-ink: #3b82f6;
+  
+  /* Status Colors */
+  --success: #4CAF50;
+  --warn: #FFB800;
+  --danger: #FF5252;
+  --danger-ink: #C62828;
+  
+  /* Scrims */
+  --scrim: rgba(10, 10, 15, 0.85);
+  --scrim-deep: rgba(5, 5, 10, 0.95);
+  
+  /* Typography */
+  --font-display: "Noto Serif Thai", "Cormorant Garamond", Georgia, serif;
+  --font-body: "Anuphan", Inter, system-ui, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, Menlo, monospace;
+  
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 24px;
+  --text-2xl: 36px;
+  --text-3xl: 54px;
+  --text-4xl: 76px;
+  
+  --leading-body: 1.52;
+  --leading-tight: 1.06;
+  --tracking-display: -0.025em;
+  
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  
+  --section-y-desktop: 96px;
+  --section-y-tablet: 68px;
+  --section-y-phone: 48px;
+  
+  /* Borders & Radius */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+  
+  /* Elevation */
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 20px 52px rgba(92, 75, 74, 0.08);
+  --elev-card: 0 8px 24px rgba(92, 75, 74, 0.06);
+  --focus-ring: 0 0 0 4px rgba(249, 179, 173, 0.22);
+  
+  /* Motion */
+  --motion-fast: 150ms;
+  --motion-base: 240ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  
+  /* Container */
+  --container-max: 1280px;
+  --container-gutter-desktop: 36px;
+  --container-gutter-tablet: 24px;
+  --container-gutter-phone: 16px;
+}
+
+/* === Base Resets === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--fg);
+  background: var(--bg);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+  opacity: 0;
+  animation: fadeInPage 0.6s ease-out forwards;
+  position: relative;
+}
+
+/* Space background with stars */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 60% 70%, white, transparent),
+    radial-gradient(1px 1px at 50% 50%, white, transparent),
+    radial-gradient(1px 1px at 80% 10%, white, transparent),
+    radial-gradient(2px 2px at 90% 60%, white, transparent),
+    radial-gradient(1px 1px at 33% 80%, white, transparent),
+    radial-gradient(1px 1px at 15% 85%, white, transparent);
+  background-size: 200% 200%, 250% 250%, 300% 300%, 180% 180%, 220% 220%, 290% 290%, 260% 260%;
+  background-position: 0% 0%, 40% 40%, 80% 80%, 20% 20%, 60% 60%, 90% 90%, 30% 30%;
+  animation: twinkleStars 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* Nebula/Galaxy glow effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: 150%;
+  background: 
+    radial-gradient(ellipse at top left, rgba(192, 132, 252, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at top right, rgba(96, 165, 250, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+  animation: nebulaFloat 10s ease-in-out infinite;
+}
+
+/* Shooting stars */
+.shooting-star {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  animation: shootingStar 3s ease-in-out infinite;
+}
+
+@keyframes twinkleStars {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes nebulaFloat {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateX(-50%) translateY(-20px) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes shootingStar {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-45deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-300px, 300px) rotate(-45deg);
+  }
+}
+
+@keyframes fadeInPage {
+  to { opacity: 1; }
+}
+
+/* === Typography === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  color: var(--fg);
+}
+
+h1 {
+  font-size: clamp(2.6rem, 7vw, var(--text-4xl));
+}
+
+h2 {
+  font-size: clamp(2rem, 4.5vw, var(--text-3xl));
+}
+
+h3 {
+  font-size: clamp(1.375rem, 3vw, var(--text-2xl));
+}
+
+p {
+  line-height: var(--leading-body);
+  color: var(--fg-2);
+}
+
+/* === Layout === */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-left: var(--container-gutter-phone);
+  padding-right: var(--container-gutter-phone);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: var(--container-gutter-tablet);
+    padding-right: var(--container-gutter-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--container-gutter-desktop);
+    padding-right: var(--container-gutter-desktop);
+  }
+}
+
+section {
+  padding-top: var(--section-y-phone);
+  padding-bottom: var(--section-y-phone);
+}
+
+@media (min-width: 768px) {
+  section {
+    padding-top: var(--section-y-tablet);
+    padding-bottom: var(--section-y-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  section {
+    padding-top: var(--section-y-desktop);
+    padding-bottom: var(--section-y-desktop);
+  }
+}
+
+/* === Components === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-standard),
+              border-color var(--motion-fast) var(--ease-standard),
+              box-shadow var(--motion-fast) var(--ease-standard),
+              transform var(--motion-fast) var(--ease-standard);
+  outline: none;
+}
+
+.btn:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary:disabled:hover {
+  background: var(--accent);
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-on);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--elev-card);
+}
+
+.btn-primary:active {
+  background: var(--accent-active);
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--motion-base) var(--ease-standard);
+}
+
+.card:hover {
+  box-shadow: var(--elev-card);
+  transform: translateY(-2px);
+}
+
+/* === Reduced Motion === */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  body {
+    opacity: 1;
+  }
+}

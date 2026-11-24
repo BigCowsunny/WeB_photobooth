@@ -1,0 +1,59 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.app::before {
+  content: '✦';
+  position: fixed;
+  top: 20%;
+  right: 10%;
+  font-size: 24px;
+  color: var(--accent);
+  opacity: 0.3;
+  animation: floatStar1 6s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.app::after {
+  content: '✧';
+  position: fixed;
+  bottom: 30%;
+  left: 15%;
+  font-size: 20px;
+  color: var(--sage-green);
+  opacity: 0.3;
+  animation: floatStar2 8s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes floatStar1 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(20px, -20px) rotate(180deg);
+    opacity: 0.4;
+  }
+}
+
+@keyframes floatStar2 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(-15px, 15px) rotate(-180deg);
+    opacity: 0.4;
+  }
+}
+
+section {
+  flex: 1;
+}

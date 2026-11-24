@@ -1,0 +1,50 @@
+.error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background: color-mix(in oklch, var(--danger) 9%, var(--surface));
+  border: 1px solid color-mix(in oklch, var(--danger) 40%, var(--surface));
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  margin: var(--space-6) 0;
+  color: var(--danger-ink);
+  font-size: var(--text-sm);
+}
+
+.error-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+}
+
+.error-banner p {
+  color: inherit;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.error-dismiss {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: var(--danger-ink);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.error-dismiss:hover {
+  background: color-mix(in oklch, var(--danger) 18%, transparent);
+}
+
+.error-dismiss:focus-visible {
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
